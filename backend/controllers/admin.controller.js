@@ -4,6 +4,8 @@ import {
   asyncHandler,
   errorHandler,
   responseHandler,
+  cookieSender,
+  tokenGenerator,
 } from "../utilities/index.js";
 
 const login = asyncHandler(async (req, res, next) => {
@@ -17,7 +19,9 @@ const login = asyncHandler(async (req, res, next) => {
   const isValidPass = admin.password === password;
 
   if (isValidPass) {
-    return responseHandler(res, 200, { txt: "ADmin logged in" });
+    const token = tokenGenerator(admin._id);
+    cookieSender(res, token);
+    return responseHandler(res, 200, { admin, token });
   } else {
     return next(new errorHandler(" invalid credentials", 401));
   }
@@ -41,7 +45,9 @@ const register = asyncHandler(async (req, res, next) => {
     password,
   });
   if (newAdmin) {
-    responseHandler(res, 201, { user: newAdmin });
+    const token = tokenGenerator(newAdmin._id);
+    cookieSender(res, token);
+    responseHandler(res, 201, { admin: newAdmin, token });
   }
 });
 
