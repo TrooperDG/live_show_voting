@@ -25,9 +25,11 @@ app.use(cookieParser());
 import userRouter from "./routes/user.route.js";
 import adminRouter from "./routes/admin.route.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
+import contetstentRouter from "./routes/contestent.route.js";
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/contestent", contetstentRouter);
 app.use(errorMiddleware);
 
 //-------------------------------
