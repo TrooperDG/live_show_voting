@@ -6,6 +6,17 @@ const contestentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    avatar: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     voters: [
       {
         type: mongoose.Schema.Types.ObjectId,
