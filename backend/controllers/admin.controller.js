@@ -16,6 +16,9 @@ const login = asyncHandler(async (req, res, next) => {
   }
 
   const admin = await Admin.findOne({ email });
+  if (!admin) {
+    return next(new errorHandler("admin not found", 404));
+  }
   const isValidPass = admin.password === password;
 
   if (isValidPass) {
