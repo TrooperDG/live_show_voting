@@ -56,6 +56,11 @@ const register = asyncHandler(async (req, res, next) => {
   }
 });
 
+const logout = asyncHandler(async (req, res, next) => {
+  cookieSender(res, "", true);
+  responseHandler(res, 200, "user logged out");
+});
+
 const voterAccess = asyncHandler(async (req, res, next) => {
   const { passcode, userId } = req.body;
 
@@ -110,4 +115,4 @@ const toggleVote = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { login, register, voterAccess, toggleVote };
+export { login, register, logout, voterAccess, toggleVote };

@@ -54,6 +54,11 @@ const register = asyncHandler(async (req, res, next) => {
   }
 });
 
+const logout = asyncHandler(async (req, res, next) => {
+  cookieSender(res, "", true);
+  responseHandler(res, 200, "admin logged out");
+});
+
 const setPasscode = asyncHandler(async (req, res, next) => {
   const { passcode } = req.body;
 
@@ -73,4 +78,4 @@ const setPasscode = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { login, register, setPasscode };
+export { login, register, logout, setPasscode };
